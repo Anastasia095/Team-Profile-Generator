@@ -34,7 +34,6 @@ function unpack(data) {
     }
 
     let unpackToString = unpackedData.toString();
-    console.log
     return unpackToString;
 }
 

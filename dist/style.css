@@ -1,5 +1,4 @@
-function createCSS() {
-    return `
+
     body {
         font-family: monospace, sans-serif;
         padding: 0;
@@ -56,7 +55,4 @@ function createCSS() {
     
     .name {
         font-weight: bolder;
-    }`
-}
-
-module.exports = createCSS;
+    }
