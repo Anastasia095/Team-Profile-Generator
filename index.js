@@ -32,7 +32,7 @@ const questions = [
         type: 'input',
         name: 'id',
         message: 'Enter employee ID',
-        validate: function(name)
+        validate: function(id)
         {
             if(!id){
                 return "Please enter id"
@@ -100,7 +100,10 @@ const managerQuestions = [
         validate: function(officeNumber)
         {
             if(!officeNumber){
-                return "Please enter github"
+                return "Please enter Office Number"
+            }
+            else if(isNaN(officeNumber)){
+                return "Please enter valid Office Number"
             }
             return true;
         }
@@ -160,11 +163,11 @@ function init() {
     }
     // function for BUIDING THE TEAM //////////////////
     function buildTeam() {
-        fs.writeFile("style.css", genCSS(), function (err) {
+        fs.writeFile("./dist/style.css", genCSS(), function (err) {
             if (err) throw err;
             console.log('CSS file is created successfully.');
         });
-        fs.writeFile("index.html", genHTML.createHTML(teamArray), function (err) {
+        fs.writeFile("./dist/index.html", genHTML.createHTML(teamArray), function (err) {
             if (err) throw err;
             console.log('File is created successfully.');
 
