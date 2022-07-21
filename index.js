@@ -19,16 +19,36 @@ const questions = [
         type: 'input',
         name: 'name',
         message: 'Enter name of the employee',
+        validate: function(name)
+        {
+            if(!name){
+                return "Please enter name"
+            }
+            return true;
+        }
+        
     },
     {
         type: 'input',
         name: 'id',
         message: 'Enter employee ID',
+        validate: function(name)
+        {
+            if(!id){
+                return "Please enter id"
+            }
+            return true;
+        }
     },
     {
         type: 'input',
         name: 'email',
         message: 'Enter employee email',
+        validate: function(email)
+        {
+            // Regex mail check (return true if valid mail)
+            return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
+        }
     }
 ];
 
@@ -46,7 +66,14 @@ const internQuestions = [
     {
         type: 'input',
         name: 'school',
-        message: 'Enter the name of your school'
+        message: 'Enter the name of your school',
+        validate: function(school)
+        {
+            if(!school){
+                return "Please enter school"
+            }
+            return true;
+        }
     },
 ];
 
@@ -54,7 +81,14 @@ const engineerQuestions = [
     {
         type: 'input',
         name: 'github',
-        message: 'Enter GitHub username'
+        message: 'Enter GitHub username',
+        validate: function(github)
+        {
+            if(!github){
+                return "Please enter github"
+            }
+            return true;
+        }
     },
 ];
 
@@ -62,7 +96,15 @@ const managerQuestions = [
     {
         type: 'input',
         name: 'officeNumber',
-        message: 'Enter Office Number'
+        message: 'Enter Office Number',
+        validate: function(officeNumber)
+        {
+            if(!officeNumber){
+                return "Please enter github"
+            }
+            return true;
+        }
+        
     },
 ]
 

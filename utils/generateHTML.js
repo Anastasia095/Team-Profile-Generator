@@ -1,26 +1,44 @@
 const Employee = require("../lib/employee");
 
 function unpack(data) {
-    let unpackedData = data.map(member =>  `
-    <div class="card">
-            <div class="innerCard1">
-                <div class="name">${member.name}</div>
-                <div>${member.getRole()}</div>
-            </div>
-            <div class="innerCard2">
-                <ul>
-                    <li>ID: ${member.id}</li>
-                    <li>Email: ${member.email}</li>
-                    <li>Office number: </li>
-                </ul>
-            </div>
-        </div>
-    `)
+
+    let unpackedData = [];
+    for (var i = 0; i < data.length; i++) {
+        var property;
+        var emoji;
+        if (data[i].officeNumber) {
+            property = `Office number: ${data[i].officeNumber}`;
+            emoji = `🍵`;
+        } else if (data[i].github) {
+            property = `GitHub: <a href="https://github.com/${data[i].github}">${data[i].github}</a>`;
+            emoji = `👓`;
+        }
+        else {
+            property = `School: ${data[i].school}`;
+            emoji = `🎓`;
+        }    
+        unpackedData[i] = `
+        <div class="card">
+                <div class="innerCard1">
+                    <div class="name">${data[i].name}</div>
+                    <div>${emoji}${data[i].getRole()}</div>
+                </div>
+                <div class="innerCard2">
+                    <ul>
+                        <li>ID: ${data[i].id}</li>
+                        <li>Email: <a href="mailto:email">${data[i].email}</a></li>
+                        <li>${property}</li>
+                    </ul>
+                </div>
+            </div>`
+    }
+
     let unpackToString = unpackedData.toString();
+    console.log
     return unpackToString;
 }
 
-function createHTML(data){
+function createHTML(data) {
     return `
     <!DOCTYPE html>
 <html lang="en">
