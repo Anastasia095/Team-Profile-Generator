@@ -10,6 +10,7 @@ const Engineer = require("./lib/engineer");
 const fs = require("fs");
 const { endWith } = require("rxjs");
 const genHTML = require('./utils/generateHTML');
+const genCSS = require('./utils/generateCSS');
 
 var teamArray = [];
 
@@ -60,7 +61,7 @@ const engineerQuestions = [
 const managerQuestions = [
     {
         type: 'input',
-        name: 'officeNmber',
+        name: 'officeNumber',
         message: 'Enter Office Number'
     },
 ]
@@ -94,21 +95,16 @@ function init() {
                     default:
                         buildTeam();
                 }
-                // conditional that runs function for employee type that the user selected
-                // if they choose Intern, run addIntern function
-                // if they no longer want to add members, you'll need to run the function that actually builds the team (creates the file, etc)
-
             })
     }
 
-    // function for ADDING A MEMBER /////////////////
-    // a seperate function for each member type
     function addIntern() {
         const internQ = questions.concat(internQuestions);
         inquirer.prompt(internQ)
             .then((answers) => {
                 const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
                 teamArray.push(intern);
+                createTeam();
             })
     }
     function addEngineer() {
@@ -117,19 +113,21 @@ function init() {
             .then((answers) => {
                 const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
                 teamArray.push(engineer);
+                createTeam();
             })
     }
     // function for BUIDING THE TEAM //////////////////
-    // function buildTeam() {
-    //     // creating the file, adding your team to it
-    //     // probably call a function, passing in your team members array - send it to another js file 
-    //     fs.writeFile(index.html, genHTML(teamArray)), function (err) {
-    //         if (err) throw err;
-    //         console.log('File is created successfully.');
-    //     }
-    // }
-    // last thing you'll want to do inside of this initializing function is call your function for creating a manager, so that it's the first question the user is asked   
+    function buildTeam() {
+        fs.writeFile("style.css", genCSS(), function (err) {
+            if (err) throw err;
+            console.log('CSS file is created successfully.');
+        });
+        fs.writeFile("index.html", genHTML.createHTML(teamArray), function (err) {
+            if (err) throw err;
+            console.log('File is created successfully.');
+
+        });
+    }
     createManager();
 }
-
-init();
+    init();
