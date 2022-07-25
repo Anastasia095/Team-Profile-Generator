@@ -10,7 +10,7 @@ function unpack(data) {
             property = `Office number: ${data[i].officeNumber}`;
             emoji = `🍵`;
         } else if (data[i].github) {
-            property = `GitHub: <a href="https://github.com/${data[i].github}">${data[i].github}</a>`;
+            property = `GitHub: <a href="https://github.com/${data[i].github}" target="_blank">${data[i].github}</a>`;
             emoji = `👓`;
         }
         else {
